@@ -11,7 +11,7 @@ public class Calc {
         PLUS,
         MINUS,
         MULTI,
-        DEVIDE;
+        DIVIDE
     }
 
     public static void main(String args[]) {
@@ -23,27 +23,27 @@ public class Calc {
             System.out.println("what you wanna do? (plus/minus/multi/devide)");
             String operation = userInput().toUpperCase();
             System.out.println("give me numbers, seperate them with space");
-            String sNumbers[] = userInput().trim().split(" ");
+            int sNumber;
+            Integer.getInteger(userInput());
+            int fNumber = Integer.getInteger(userInput());
             //List<Integer> iNumbers = new ArrayList<Integer>();
-            int iNumber=0;
-            for (String number : sNumbers) {
-                System.out.println(number);
+
                 //iNumbers.add(Integer.parseInt(number));
-                if(operation.equals(operations.PLUS.toString())){
-                    iNumber += Integer.parseInt(number);
+                /*if(operation.equals(operations.PLUS.toString())){
+                    sNumber += fNumber;
                 } else if(operation.equals(operations.MINUS.toString())) {
-                    iNumber -= Integer.parseInt(number);
+                    sNumber -= fNumber;
                 } else if(operation.equals(operations.MULTI.toString())) {
-                    iNumber *= Integer.parseInt(number);
-                } else if(operation.equals(operations.DEVIDE.toString())) {
-                    iNumber /= Integer.parseInt(number);
+                    sNumber *= fNumber;
+                } else if(operation.equals(operations.DIVIDE.toString())) {
+                    sNumber /= fNumber;
                 } else {
                     System.out.println("Something went wrong");
                     return;
-                }
+                }*/
 
-            }
-            System.out.println("Result is: " + iNumber);
+
+            //System.out.println("Result is: " + sNumber);
             //int nr1 = (int) (numbers.substring(0, numbers.indexOf(" ")));
         }
     }
