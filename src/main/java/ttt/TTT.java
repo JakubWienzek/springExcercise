@@ -13,7 +13,7 @@ public class TTT {
     private Board gameBoard;
     //private Player actualPlayer; //TODO - do another class for Player?
     private Status actualPlayer;
-    private Scanner scanner;
+
 
     public static void main(String args[]) {
         new TTT().start();
@@ -22,55 +22,68 @@ public class TTT {
     TTT() {
         gameBoard = new Board();
         gameBoard.fillGameBoard();
-        scanner = new Scanner(System.in);
     }
 
     private void start() {
         actualPlayer = Status.CROSS;
         //gameBoard.getGameBoard().forEach(p-> System.out.println(p.getActualStatus() + " " + p.getCellID()));
-        while(true) {
+        while(true) { //TODO - loop should have an end, possibly best to use recursion
             gameBoard.drawBoardWithFieldNumbers();
             System.out.println("Pick a field from 1 to 9:");
-            changeActualPlayer(); //TODO - is there a reason for a method for 1 line?
             gameBoard.setFieldWithStatus(getUserFieldNumberInput(), actualPlayer);
             gameBoard.drawBoardWithFieldStatus();
             System.out.println("-- -- -- --");
-            // TODO - winning condition
+            changeActualPlayer(); //TODO - is there a reason for a method for 1 line?
+            isThereAWinner();
         }
     }
 
     /**
      * Method of gathering input from user and validating its form and value
-     * @return
+     * @return chosenNumber Validated input from user - a number from 1 to 9
      * @throws InputMismatchException
      */
     private int getUserFieldNumberInput() throws InputMismatchException {
+        Scanner scanner = new Scanner(System.in);
+        int chosenNumber = inputValidator(scanner);
 
-        int userLine = -1;
-        try {
-            while(scanner.hasNextInt()) {
-                userLine = scanner.nextInt();
+        return chosenNumber;
+    }
+
+    private int inputValidator(Scanner scanner) throws InputMismatchException {
+        boolean isInputOK = false;
+        int input = 0;
+
+        do {
+            try {
+                input = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Wrong character, try again");
+                scanner.nextLine();
+                continue;
             }
-        } catch (InputMismatchException e) {
-            System.out.println("Wrong character, try again");
-            getUserFieldNumberInput();
-        }
+            if( input>=1 && input <= 9) {
+                input--; //fields are from 0 to 8
+                if (gameBoard.isFieldEmpty(input)) {
+                    isInputOK = true;
+                }
+            } else {
+                System.out.println("Input either too small or too high, try again");
+            }
+        } while(!isInputOK);
 
-        if(userLine < 0 || userLine > 8) {
-            System.out.println("Number is either too high or too low, try again");
-            getUserFieldNumberInput();
-            //userLine = scanner.nextInt();
-        }
-
-        if(!gameBoard.getGameBoard().get(userLine-1).isStatus(Status.EMPTY)) {
-            System.out.println("This field is already occupied, try again");
-            getUserFieldNumberInput();
-            //userLine = scanner.nextInt();
-        }
-        return userLine; //TODO ?
+        return input;
     }
 
     private void changeActualPlayer() {
         actualPlayer = actualPlayer == Status.CIRCLE ? Status.CROSS : Status.CIRCLE;
+    }
+
+    private boolean isThereAWinner() {
+        boolean isWinner = false;
+
+
+
+        return isWinner;
     }
 }

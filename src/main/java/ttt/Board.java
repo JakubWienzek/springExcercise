@@ -41,13 +41,26 @@ public class Board {
         }
     }
 
-    public void setFieldWithStatus(int cellNumber, Status player) {
-        cellNumber--;
-        if(gameBoard.get(cellNumber).isStatus(Cell.Status.EMPTY)){
-            gameBoard.get(cellNumber).setActualStatus(player);
+    public boolean isFieldEmpty(int cellNumber) {
+        boolean isFiledEmpty = true;
+        if(gameBoard.get(cellNumber).isStatus(Status.EMPTY)){
+            return isFiledEmpty;
         } else {
             System.out.println("Field is full, try again");
+            return !isFiledEmpty;
         }
+    }
+
+    public void setFieldWithStatus(int cellNumber, Status playerSign) {
+            gameBoard.get(cellNumber).setActualStatus(playerSign);
+    }
+
+    public boolean isThreeInRow() {
+        boolean isThree = false;
+        if(gameBoard.get(0).getActualStatus().equals()){
+
+        }
+        return isThree;
     }
 
     public List<Cell> getGameBoard() {
