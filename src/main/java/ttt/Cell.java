@@ -3,9 +3,9 @@ package ttt;
 /**
  * Created by B0660864 on 2017-03-27.
  */
-public class Cell {
+class Cell {
 
-    private Status actualStatus;
+    private Status status;
     private int cellID;
 
     public enum Status {
@@ -15,30 +15,30 @@ public class Cell {
     }
 
     Cell() {
-        actualStatus = Status.EMPTY;
+        status = Status.EMPTY;
     }
 
     Cell(int cellID) {
-        actualStatus = Status.EMPTY;
+        status = Status.EMPTY;
         this.cellID = cellID;
     }
 
-    public boolean isStatus(Status statusToCheck) {
-        if(actualStatus == statusToCheck){
+    protected boolean isStatus(Status statusToCheck) {
+        if(status == statusToCheck) {
             return true;
         }
         return false;
     }
 
-    public Status getActualStatus() {
-        return actualStatus;
+    protected Status getStatus() {
+        return status;
     }
 
-    public void setActualStatus(Status actualStatus) {
-        this.actualStatus = actualStatus;
+    protected void setStatus(Status status) {
+        this.status = status;
     }
 
-    public int getCellID() {
+    protected int getCellID() {
         return cellID;
     }
 }

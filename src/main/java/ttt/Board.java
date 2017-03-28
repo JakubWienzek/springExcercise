@@ -34,7 +34,7 @@ public class Board {
     public void drawBoardWithFieldStatus() {
         int row = 0;
         for(Cell cell : gameBoard){
-            System.out.print(cell.getActualStatus()+ " ");
+            System.out.print(cell.getStatus()+ " ");
             if(++row % 3 == 0){
                 System.out.println();
             }
@@ -52,14 +52,14 @@ public class Board {
     }
 
     public void setFieldWithStatus(int cellNumber, Status playerSign) {
-            gameBoard.get(cellNumber).setActualStatus(playerSign);
+            gameBoard.get(cellNumber).setStatus(playerSign);
     }
 
     public boolean isThreeInRow() {
         boolean isThree = false;
-        if(gameBoard.get(0).getActualStatus().equals()){
-
-        }
+        //if(gameBoard.get(0).getStatus().equals()){
+            //TODO - win mechanism
+        //}
         return isThree;
     }
 

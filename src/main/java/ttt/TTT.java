@@ -13,6 +13,7 @@ public class TTT {
     private Board gameBoard;
     //private Player actualPlayer; //TODO - do another class for Player?
     private Status actualPlayer;
+    private boolean isWinner;
 
 
     public static void main(String args[]) {
@@ -26,16 +27,17 @@ public class TTT {
 
     private void start() {
         actualPlayer = Status.CROSS;
-        //gameBoard.getGameBoard().forEach(p-> System.out.println(p.getActualStatus() + " " + p.getCellID()));
-        while(true) { //TODO - loop should have an end, possibly best to use recursion
+        //gameBoard.getGameBoard().forEach(p-> System.out.println(p.getStatus() + " " + p.getCellID()));
+        do {
             gameBoard.drawBoardWithFieldNumbers();
             System.out.println("Pick a field from 1 to 9:");
             gameBoard.setFieldWithStatus(getUserFieldNumberInput(), actualPlayer);
             gameBoard.drawBoardWithFieldStatus();
             System.out.println("-- -- -- --");
-            changeActualPlayer(); //TODO - is there a reason for a method for 1 line?
-            isThereAWinner();
-        }
+            changeActualPlayer();
+            isWinner = isThereAWinner();
+        } while(!isWinner);
+        System.out.println(actualPlayer + " won!");
     }
 
     /**
@@ -81,9 +83,7 @@ public class TTT {
 
     private boolean isThereAWinner() {
         boolean isWinner = false;
-
-
-
+        // TODO - anything here?
         return isWinner;
     }
 }
