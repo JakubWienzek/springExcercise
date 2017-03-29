@@ -21,7 +21,7 @@ public class Board {
         }
     }
 
-    public void drawBoardWithFieldNumbers() {
+    public void drawBoardWithFieldNumbers() { //TODO - make one method - code repeated
         int row = 0;
         for(Cell cell : gameBoard){
             System.out.print(cell.getCellID() + " ");
@@ -42,12 +42,11 @@ public class Board {
     }
 
     public boolean isFieldEmpty(int cellNumber) {
-        boolean isFiledEmpty = true;
         if(gameBoard.get(cellNumber).isStatus(Status.EMPTY)){
-            return isFiledEmpty;
+            return true;
         } else {
             System.out.println("Field is full, try again");
-            return !isFiledEmpty;
+            return false;
         }
     }
 
@@ -65,9 +64,5 @@ public class Board {
 
     public List<Cell> getGameBoard() {
         return gameBoard;
-    }
-
-    public void setGameBoard(List<Cell> gameBoard) {
-        this.gameBoard = gameBoard;
     }
 }

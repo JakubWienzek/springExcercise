@@ -11,7 +11,6 @@ import static ttt.Cell.Status;
 public class TTT {
 
     private Board gameBoard;
-    //private Player actualPlayer; //TODO - do another class for Player?
     private Status actualPlayer;
     private boolean isWinner;
 
@@ -27,7 +26,6 @@ public class TTT {
 
     private void start() {
         actualPlayer = Status.CROSS;
-        //gameBoard.getGameBoard().forEach(p-> System.out.println(p.getStatus() + " " + p.getCellID()));
         do {
             gameBoard.drawBoardWithFieldNumbers();
             System.out.println("Pick a field from 1 to 9:");
@@ -45,17 +43,21 @@ public class TTT {
      * @return chosenNumber Validated input from user - a number from 1 to 9
      * @throws InputMismatchException
      */
-    private int getUserFieldNumberInput() throws InputMismatchException {
+    private int getUserFieldNumberInput()  {
         Scanner scanner = new Scanner(System.in);
-        int chosenNumber = inputValidator(scanner);
-
-        return chosenNumber;
+        int input = 0;
+        do {
+            input = gatherIntegerInput(input, scanner) - 1; //-1 cause array is from 0 to 8
+        } while(!isInputInRange(input));
+        return input;
     }
 
-    private int inputValidator(Scanner scanner) throws InputMismatchException {
-        boolean isInputOK = false;
-        int input = 0;
+    private void changeActualPlayer() {
+        actualPlayer = actualPlayer == Status.CIRCLE ? Status.CROSS : Status.CIRCLE;
+    }
 
+    private int gatherIntegerInput(int input, Scanner scanner) throws InputMismatchException {
+        boolean isInputInteger = false;
         do {
             try {
                 input = scanner.nextInt();
@@ -64,21 +66,20 @@ public class TTT {
                 scanner.nextLine();
                 continue;
             }
-            if( input>=1 && input <= 9) {
-                input--; //fields are from 0 to 8
-                if (gameBoard.isFieldEmpty(input)) {
-                    isInputOK = true;
-                }
-            } else {
-                System.out.println("Input either too small or too high, try again");
-            }
-        } while(!isInputOK);
-
+            isInputInteger = true;
+        } while(!isInputInteger);
         return input;
     }
 
-    private void changeActualPlayer() {
-        actualPlayer = actualPlayer == Status.CIRCLE ? Status.CROSS : Status.CIRCLE;
+    private boolean isInputInRange(int input) {
+        if( input>=0 && input <= 8) {
+            if (gameBoard.isFieldEmpty(input)) {
+                return true;
+            }
+        } else {
+            System.out.println("Input either too small or too high, try again");
+        }
+        return false;
     }
 
     private boolean isThereAWinner() {

@@ -14,17 +14,13 @@ class Cell {
         EMPTY
     }
 
-    Cell() {
-        status = Status.EMPTY;
-    }
-
     Cell(int cellID) {
         status = Status.EMPTY;
         this.cellID = cellID;
     }
 
     protected boolean isStatus(Status statusToCheck) {
-        if(status == statusToCheck) {
+        if(status.equals(statusToCheck)) {
             return true;
         }
         return false;
